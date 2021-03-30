@@ -10,7 +10,7 @@ LABEL com.mck.image.created=$CREATED_DATE
 LABEL com.mck.image.revision=$SOURCE_COMMIT
 LABEL com.mck.image.title=""
 LABEL com.mck.image.url=${DOCKER_DESTINATION}
-LABEL com.mck.image.source=https://github.com/mckesson/eu-sap-sbs-so-microservice
+LABEL com.mck.image.source=""
 
 ENV NODE_ENV production
 ENV LOG_LEVEL $LOG_LEVEL
