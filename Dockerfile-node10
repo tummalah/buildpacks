@@ -1,0 +1,31 @@
+FROM node:10-alpine as prod
+ARG CREATED_DATE=not-set
+ARG SOURCE_COMMIT=not-set
+ARG DOCKER_DESTINATION=not-set
+LABEL com.mck.image.authors=hemanth.tummala@mckesson.com
+LABEL com.mck.image.created=$CREATED_DATE
+LABEL com.mck.image.revision=$SOURCE_COMMIT
+LABEL com.mck.image.title="eu-sap-sbs-quota-article-assignment"
+LABEL com.mck.image.url=${DOCKER_DESTINATION}
+LABEL com.mck.image.source=
+
+ENV NODE_ENV production
+ENV LOG_LEVEL error
+ENV NODE_TARGET GKE
+RUN apk add --no-cache tini bash
+WORKDIR /node
+COPY package*.json ./
+RUN mkdir app && chown -R node:node .
+USER node
+RUN npm install --only=production \
+    && npm cache clean --force
+WORKDIR /node/app
+COPY --chown=node:node . .
+ENTRYPOINT [ "tini","--" ]
+CMD ["node","index.js"]
+## local
+FROM prod as local 
+ENV NODE_ENV local
+ENV LOG_LEVEL info
+RUN npm install --only=development \
+    && npm cache clean --force
