@@ -2,10 +2,10 @@ FROM node:10-alpine as prod
 ARG CREATED_DATE=not-set
 ARG SOURCE_COMMIT=not-set
 ARG DOCKER_DESTINATION=not-set
-LABEL com.mck.image.authors=hemanth.tummala@mckesson.com
+LABEL com.mck.image.authors=hemanth.tummala
 LABEL com.mck.image.created=$CREATED_DATE
 LABEL com.mck.image.revision=$SOURCE_COMMIT
-LABEL com.mck.image.title="eu-sap-sbs-quota-article-assignment"
+LABEL com.mck.image.title=""
 LABEL com.mck.image.url=${DOCKER_DESTINATION}
 LABEL com.mck.image.source=
 
